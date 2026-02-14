@@ -69,11 +69,20 @@ async def crear_Usuario(usuario:dict):
    }
 
 
-@app.put("/v1/usuario/{id}", tags=['Actualizar Usuario'])
+@app.put("/v1/usuario/{id}", tags=['CRUD HTTP'])
 async def actualizar_Usuario(id: int, usuario_actualizado: dict):
-    for index, usr in enumerate(usuarios): 
-        if usr["id"] == id:
-            usuarios[index].update(usuario_actualizado)
-            return {"mensaje": "Usuario actualizado", "usuario": usuarios[index]}
+   for index, usr in enumerate(usuarios): 
+      if usr["id"] == id:
+         usuarios[index].update(usuario_actualizado)
+         return {"mensaje": "Usuario actualizado", "usuario": usuarios[index]}
     
-    return {"mensaje": "Usuario no encontrado", "id": id}
+   return {"mensaje": "Usuario no encontrado", "id": id}
+ 
+@app.delete("/v1/usuario/{id}", tags=['CRUD HTTP'])
+async def eliminar_Usuario(id: int):
+   for index, usr in enumerate(usuarios): 
+      if usr["id"] == id:
+         usuario_eliminado = usuarios.pop(index)
+         return {"mensaje": "Usuario eliminado", "usuario": usuario_eliminado}
+    
+   return {"mensaje": "Usuario no encontrado", "id": id}
