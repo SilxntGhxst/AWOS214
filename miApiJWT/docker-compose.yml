@@ -1,0 +1,8 @@
+services:
+  api:
+    build: .
+    container_name: APIJWT
+    ports:
+      - "5040:5000"
+    volumes:
+      - ./app:/app/app
