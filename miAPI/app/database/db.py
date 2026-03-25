@@ -5,7 +5,7 @@ import os
 #1. Definimos la URL de la BD
 DATABASE_URL = os.getenv(
    "DATABASE_URL",
-   "postgresql://admin:123456@postgres:5434/DB_miapi"
+   "postgresql://admin:123456@postgres:5432/DB_miapi"
 )
 
 #2. Creamos el motor de la BD
@@ -17,3 +17,13 @@ SessionLocal = sessionmaker(
    autoflush=False, 
    bind= engine
 )
+
+
+Base= declarative_base()
+
+def get_db():
+   db = SessionLocal()
+   try:
+      yield db
+   finally:
+      db.close()

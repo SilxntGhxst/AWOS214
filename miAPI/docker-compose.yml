@@ -1,19 +1,16 @@
-version: "3.9"
-
 services:
-
   api:
     build: .
     container_name: ServerFastAPI
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/app
     depends_on:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://admin:123456@postgres:5434/DB_miapi #Posible obstrucción, cambio al puerto 5434 para evitar conflictos 
+      DATABASE_URL: postgresql://admin:123456@postgres:5432/DB_miapi
 
   postgres:
     image: postgres:15
